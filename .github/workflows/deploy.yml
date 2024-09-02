@@ -31,6 +31,7 @@ jobs:
           key: ${{ secrets.KEY }}
           source: "compose.yaml,gl-docs.tar"
           target: "/home/${{secrets.HOST_USERNAME}}/notes-site/"
+          rm: true
 
       - name: Deploy on Personal Site Server
         uses: appleboy/ssh-action@master
