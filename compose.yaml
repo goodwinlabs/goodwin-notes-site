@@ -1,9 +1,7 @@
 services:
   gl-docs:
     container_name: gl-docs
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: gl-docs
     restart: always
     ports:
       - 5700:80

@@ -20,6 +20,18 @@ jobs:
           path: content
           token: ${{ secrets.PAT }}
 
+      - name: Build and package docker image
+        run: make build
+
+      - name: Copy over required files to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.HOST_USERNAME }}
+          key: ${{ secrets.KEY }}
+          source: "compose.yaml,gl-docs.tar"
+          target: "/home/${{secrets.HOST_USERNAME}}/notes-site/"
+
       - name: Deploy on Personal Site Server
         uses: appleboy/ssh-action@master
         with:
@@ -27,4 +39,7 @@ jobs:
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
-            make build-prod
+            cd ~/notes-site
+            docker load -i gl-docs.tar
+            docker compose up -d
+            docker image prune -af

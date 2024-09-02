@@ -1,5 +1,3 @@
-SHELL=/bin/bash
-
 help:
 	@echo "Goodwin Labs Documentation Site"
 	@echo
@@ -18,6 +16,6 @@ add-content: ## Clone down private notes repo
 	cd ..; \
 	fi
 
-build-prod: update-theme add-content ## Build and deploy site
-	docker-compose up -d --build
-	docker image prune -af
+build: update-theme add-content ## Build the docker image
+	docker build -t gl-docs .
+	docker save -o gl-docs.tar gl-docs
