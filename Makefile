@@ -5,7 +5,7 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort	| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m - %s\n", $$1, $$2}'
 
 update-theme: ## Update Site Theme
-	git submodule update --remote --merge
+	git submodule update --init --recursive
 
 add-content: ## Clone down private notes repo
 	if [ ! -d content ]; then \
