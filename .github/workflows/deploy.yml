@@ -26,5 +26,4 @@ jobs:
           host: ${{ secrets.HOST }}
           key_path: ~/.ssh/id_ed25519
           script: |
-            docker build -t gl-docs-site
-            docker compose up -d
+            make build-prod

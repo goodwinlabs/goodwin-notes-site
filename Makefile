@@ -18,3 +18,4 @@ add-content: ## Clone down private notes repo
 
 build-prod: update-theme add-content ## Build and deploy site
 	docker-compose up -d --build
+	docker image prune -af
