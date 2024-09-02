@@ -1,0 +1,28 @@
+baseURL = 'https://docs.goodwinlabs.dev/'
+
+title = 'Goodwin Notes'
+theme = 'techdoc'
+
+languageCode = 'en-us'
+metaDataFormat = "yaml"
+
+[params]
+  description = "My Internal Notes Site"
+  menu_style = "slide-menu"
+  menu_exclusion = [
+    "_templates",
+    "_attachments",
+    ".trash"
+  ]
+
+[markup]
+  defaultMarkdownHandler = "goldmark"
+  [markup.goldmark.renderer]
+    unsafe= true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6
+    ordered = false
+
+[outputs]
+  home = ["HTML", "RSS"]

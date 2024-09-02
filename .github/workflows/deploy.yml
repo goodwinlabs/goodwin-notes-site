@@ -1,0 +1,30 @@
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types:
+      - build-site
+
+jobs:
+  deploy-site:
+    name: Deploy Documentation Site
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Site Repository
+        uses: actions/checkout@v4
+
+      - name: Checkout Notes Repository
+        uses: actions/checkout@v4
+        with:
+          repository: goodwinlabs/goodwin-notes
+          ref: ${{ github.event.client_payload.ref || 'main' }}
+          path: content
+          token: ${{ secrets.PAT }}
+
+      - name: Deploy on Personal Site Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          key_path: ~/.ssh/id_ed25519
+          script: |
+            docker build -t gl-docs-site
+            docker compose up -d
