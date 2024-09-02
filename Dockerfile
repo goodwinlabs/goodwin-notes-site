@@ -9,4 +9,4 @@ RUN hugo --gc --environment production
 ###
 
 FROM hugomods/hugo:nginx
-COPY --from=builder /site/public /usr/share/nginx/html
+COPY --from=builder /site/public /site

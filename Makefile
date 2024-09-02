@@ -19,3 +19,9 @@ add-content: ## Clone down private notes repo
 build: update-theme add-content ## Build the docker image
 	docker build -t gl-docs .
 	docker save -o gl-docs.tar gl-docs
+
+build-local: update-theme add-content ## Build the docker image
+	docker build -t gl-docs . --build-arg base_url="127.0.01:5700"
+
+deploy-local: build-local
+	docker-compose up
