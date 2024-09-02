@@ -8,5 +8,5 @@ RUN hugo --gc --environment production
 
 ###
 
-FROM hugomods/hugo:nginx
-COPY --from=builder /site/public /site/public
+FROM nginx:alpine
+COPY --from=builder /site/public /usr/share/nginx/html
