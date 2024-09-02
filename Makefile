@@ -7,14 +7,14 @@ help:
 update-theme: ## Update Site Theme
 	git submodule update --remote --merge
 
-add-content
-
-build-prod: ## Build and deploy site
+add-content: ## Clone down private notes repo
 	if [ ! -d content ]; then \
 	git clone --depth 1 https://github.com/goodwinlabs/goodwin-notes.git content/; \
 	else \
 	cd content; \
 	git pull https://github.com/goodwinlabs/goodwin-notes.git; \
 	cd ..; \
-	fi; \
-	docker-compose up -d
+	fi
+
+build-prod: update-theme add-content ## Build and deploy site
+	docker-compose up -d --build

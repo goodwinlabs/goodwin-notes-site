@@ -1,11 +1,14 @@
-FROM registry.gitlab.com/pages/hugo/hugo_extended:0.105.0 AS builder
+ARG base_url=
+
+FROM registry.gitlab.com/pages/hugo/hugo_extended:0.132.2 AS builder
+ENV HUGO_BASEURL=${base_url}
 WORKDIR /site
 COPY . /site
-RUN ls -la && hugo --gc
+RUN hugo --gc --environment production
 
 ###
 
-FROM nginx:alpine
-RUN rm -rf /usr/share/nginx/html/*
-RUN sed -i 's/#error_page/error_page/' /etc/nginx/conf.d/default.conf
-COPY --from=builder /site/public /usr/share/nginx/html
+FROM hugomods/hugo:nginx
+COPY --from=builder /site/public /site
+# FROM nginx:alpine
+# COPY --from=builder /site/public /usr/share/nginx/html
