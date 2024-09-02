@@ -3,6 +3,9 @@ on:
   repository_dispatch:
     types:
       - build-site
+  push:
+    branches:
+      - main
 
 jobs:
   deploy-site:
