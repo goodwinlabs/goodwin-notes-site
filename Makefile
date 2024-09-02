@@ -17,7 +17,7 @@ add-content: ## Clone down private notes repo
 	fi
 
 build: update-theme add-content ## Build the docker image
-	docker build -t gl-docs .
+	docker build -t gl-docs . --build-arg base_url="docs.goodwinlabs.dev"
 	docker save -o gl-docs.tar gl-docs
 
 build-local: update-theme add-content ## Build the docker image
