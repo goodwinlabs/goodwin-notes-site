@@ -24,6 +24,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
+          username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
             make build-prod
