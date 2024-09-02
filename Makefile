@@ -1,3 +1,5 @@
+SHELL=/bin/bash
+
 help:
 	@echo "Goodwin Labs Documentation Site"
 	@echo
