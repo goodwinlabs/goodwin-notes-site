@@ -6,6 +6,12 @@ theme = 'techdoc'
 languageCode = 'en-us'
 metaDataFormat = "yaml"
 
+ignoreFiles = [
+  "_templates",
+  "_attachments",
+  ".trash"
+]
+
 [params]
   description = "My Internal Notes Site"
   menu_style = "slide-menu"
